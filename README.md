@@ -23,6 +23,6 @@ Example of type two input file:
 ![sampleout](https://github.com/MDHD99/ContactHoundOSINT/blob/master/images/termOUT.PNG)
 
 ### References
-A part of the email gathering functions of this tool was based on infoga by @m4ll0k 
+A part of the email gathering functions of this tool was based on infoga by [m4ll0k](https://github.com/m4ll0k/Infoga/blob/master/README.md)
 
 

@@ -13,6 +13,7 @@ class Yahoo(Request):
 	def __init__(self,target):
 		Request.__init__(self)
 		self.target = target
+		self.name = "Yahoo"
 
 	def search(self):
 		test('Searching "%s" in Yahoo...'%(self.target))

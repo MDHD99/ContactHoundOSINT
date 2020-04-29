@@ -13,6 +13,7 @@ class PGP(Request):
 	def __init__(self,target):
 		Request.__init__(self)
 		self.target = target
+		self.name = "PGP"
 
 	def search(self):
 		test('Searching "%s" in PGP...'%(self.target))

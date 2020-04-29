@@ -10,6 +10,7 @@ try:
 	from urllib.parse import urlparse
 except ImportError as e:
 	from urlparse import urlparse
+import os.path
 
 def checkTarget(target):
 	o = urlparse(target)
@@ -40,3 +41,32 @@ def checkVerbose(ver):
 	elif verb == 1: return 1
 	elif verb == 2: return 2
 	else: return 3
+
+def checkType(file):
+	file = int(file)
+	if   file == 1: return 1
+	elif file == 2: return 2
+	elif file == 3: return 3
+	else: exit(warn('%s is not a valid file type'%file))
+
+
+
+
+def checkFile(file):
+	try:
+		open(file)
+		return file
+	except IOError:
+		exit(warn('Please use a valid/existing csv file'))
+
+
+def checkPath(path):
+	try:
+		if 'csv' not in path:
+			exit(warn('Output file must be csv'))
+
+		file = open(path,"w")
+		file.close()
+		return path
+	except IOError:
+		exit(warn('Please use a valid path for output file'))

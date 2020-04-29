@@ -9,34 +9,77 @@ from lib.colors import *
 
 class Banner:
 	def banner(self):
-		print("_"*40)
-		print("-==[ Infoga - Email OSINT ")
-		print("-==[ Momo (m4ll0k) Outaadi ")
-		print("-==[ %shttps://github.com/m4ll0k%s "%(Y%0,E))
-		print("_"*40 + "\n")
+		print("\n")
+		print("""
+ _____             _             _     _   _                       _ 
+/  __ \           | |           | |   | | | |                     | |      / \_
+| /  \/ ___  _ __ | |_ __ _  ___| |_  | |_| | ___  _   _ _ __   __| |     (    @\___
+| |    / _ \| '_ \| __/ _` |/ __| __| |  _  |/ _ \| | | | '_ \ / _` |    /         O
+| \__/\ (_) | | | | || (_| | (__| |_  | | | | (_) | |_| | | | | (_| |   /   (_____/    
+ \____/\___/|_| |_|\__\__,_|\___|\__| \_| |_/\___/ \__,_|_| |_|\__,_|  /_____/   U                                                           
+   
+   
+** Email gathering and automatic email sending tool
+** Author: Mohamad Hammoud a.k.a MDHD
+** DISCLAMER This tool is based on infoga developed by m4ll0k. 
+** DISCLAMER This tool is aimed for ethical information security usage.
+** Version ALPHA
+
+		        """)
 
 	def usage(self,_exit_=False):
 		self.banner()
-		print("Usage: infoga.py [OPTIONS]\n")
-		print("\t-d --domain\tTarget URL/Name")
-		print("\t-s --source\tSource data, default \"all\":\n")
-		print("\t\tall\tUse all search engine")
-		print("\t\tgoogle\tUse google search engine")
-		print("\t\tbing\tUse bing search engine")
-		print("\t\tyahoo\tUse yahoo search engine")
-		print("\t\task\tUse ask search engine")
-		print("\t\tbaidu\tUse baidu search engine")
-		print("\t\tdogpile\tUse dogpile search engine")
-		print("\t\texalead\tUse exalead search engine")
-		print("\t\tpgp\tUse pgp search engine\n")
-		print("\t-b --breach\tCheck if email breached")
-		print("\t-i --info\tGet email informations")
-		print("\t-r --report\tSimple file text report")
-		print("\t-v --verbose\tVerbosity level (1,2 or 3)")
-		print("\t-H --help\tShow this help and exit\n")
-		print("Example:")
-		print("\tinfoga.py --domain site.gov -v 3")
-		print("\tinfoga.py --info admin@site.gov -v 3")
-		print("\tinfoga.py --domain site.gov --source pgp --breach -v 1")
-		print("\tinfoga.py --domain site.gov --source google --breach --report site_gov.txt -v 3\n")
+		print("""
+
+		
+ Usage: CHound.py [options]
+ Options:
+ -h,            --help                    show this help message and exit
+ --emailgather                            use email gathering
+ --emailsend                              use email sending  
+
+
+ Email Gathering:
+
+ -d,            --domain                  specify domain
+ -f,            --file                    specify domain or ip input file
+ -t,            --type                    specify input file type:
+ 												1 => Only domains column
+ 												2 => Domain and ip
+ 												3 => Domain ip and emails   
+ --ip,                                    specify IPV4 address
+ -o,            --output                  specify output file
+ --ot                                     specify output type:  0  => List of all found emails
+																1  => Most accurate email    
+ Example:
+		 CHound.py --emailgather -d google.com --ot 0 
+		 CHound.py --emailgather -D domains.csv -o results.csv --ot 1 
+
+ Email Sending:  
+
+ -H             --html                    input file with dynamic html
+ -f             --file                    input file(csv) without attachment
+ --fa                                     input file(csv) with attachment
+ --sE                                     sender email 
+ --sP                                     sender password
+ --subject                                email subject     
+	 """)
+
 		if _exit_: exit(0)
+	def output(self):
+		print("""
+		
+     |\_/|                  
+     | @ @   Woof! 
+     |   <>              _  
+     |  _/\------____ ((| |))
+     |               `--' |   
+ ____|_       ___|   |___.' 
+/_/_____/____/_______|
+
+
+
+**List of emails fetched
+		
+
+				        """)

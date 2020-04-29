@@ -13,6 +13,7 @@ class Exalead(Request):
 	def __init__(self,target):
 		Request.__init__(self)
 		self.target = target
+		self.name = "Exalead"
 
 	def search(self):
 		test('Searching "%s" in Exalead...'%(self.target))

@@ -13,6 +13,7 @@ class Google(Request):
 	def __init__(self,target):
 		Request.__init__(self)
 		self.target = target
+		self.name = "Google"
 
 	def search(self):
 		test('Searching "%s" in Google...'%(self.target))

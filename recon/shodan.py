@@ -13,6 +13,7 @@ class Shodan(Request):
 	def __init__(self,ip):
 		Request.__init__(self)
 		self.ip = ip
+		self.name = "Shodan"
 
 	def search(self):
 		url = "https://api.shodan.io/shodan/host/{target}?key=UNmOjxeFS2mPA3kmzm1sZwC0XjaTTksy".format(

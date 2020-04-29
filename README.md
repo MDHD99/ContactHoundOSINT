@@ -1,4 +1,4 @@
-# Contact Hound- Contact OSINT
+# Contact Hound- Email OSINT
 Contact Hound is an automated email gathering/notification delivery tool.
 
 ## Installation

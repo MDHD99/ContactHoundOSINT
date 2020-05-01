@@ -12,12 +12,12 @@ $ python setup.py install
 
 For a single domain
 ```
-python CHound.py -d example.com 
+python CHound.py --emailgather -d example.com 
 ```
 
 For using an input file and save results to an output file
 ```
-python CHound.py -f domains.csv -t 2 -o results.csv
+python CHound.py --emailgather -f domains.csv -t 2 -o results.csv
 ```
 Example of type two input file:
 ![file2](https://github.com/MDHD99/ContactHoundOSINT/blob/master/images/file2.PNG)

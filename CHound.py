@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*- 
 #
-# @name   : chound - Email OSINT
-# @url    : http://github.com/m4ll0k
-# @author : Momo Outaadi (m4ll0k)
+# @name   : Contact Hound- Email OSINT
+# @url    : http://github.com/MDHD99
+# @author : Mohammad Hammoud (m4ll0k)
 
 import sys
 import json

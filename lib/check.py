@@ -62,11 +62,18 @@ def checkFile(file):
 
 def checkPath(path):
 	try:
-		if 'csv' not in path:
-			exit(warn('Output file must be csv'))
+		if 'csv' and 'json' not in path:
+			exit(warn('Output file must be csv or json'))
 
 		file = open(path,"w")
 		file.close()
 		return path
 	except IOError:
 		exit(warn('Please use a valid path for output file'))
+
+
+def checkouttype(file):
+	if   'csv' in file: return 'csv'
+	elif 'json' in file: return 'json'
+	else: exit(warn('%s is not a valid output type'%type))
+

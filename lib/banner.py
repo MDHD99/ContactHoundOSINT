@@ -48,7 +48,7 @@ class Banner:
  												2 => Domain and ip
  												3 => Domain ip and emails   
  --ip,                                    specify IPV4 address
- -o,            --output                  specify output file
+ -o,            --output                  specify output file('.csv or .json only')
  --ot                                     specify output type:  0  => List of all found emails
 																1  => Most accurate email    
  Example:

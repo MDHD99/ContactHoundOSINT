@@ -39,6 +39,7 @@ class chound(object):
 		self.breach = False
 		self.listEmail = []
 		self.output = None
+		self.outtype = 'csv'
 		self.fileName = None
 		self.input = None
 		self.filetype = 1
@@ -107,15 +108,16 @@ class chound(object):
 				if o in ('-b','--breach'):self.breach=True
 				if o in ('-o','--output'):
 					if a != '':
-			
+					
 						self.fileName = checkPath(a)
 						self.output = writePANDAS(a)
-
+						self.outtype = checkouttype(a)
 					else:
 						Banner().usage(True)
 
 					
 				if o in ('-h','--help'):Banner().usage(True)
+				
 
 			if((self.domain != None and self.input != None) or (self.domain == None and self.input == None)):
 				Banner().usage(True)
@@ -175,8 +177,11 @@ class chound(object):
 
 
 							  """)
-					if type(self.output) != 'NoneType':
+
+					if  self.outtype == 'csv':
 						outputCSV(self.output,self.fileName)
+					elif self.outtype == 'json':
+						outputJSON(self.output,self.fileName)
 
 
 				elif self.filetype == 2:
@@ -212,8 +217,11 @@ class chound(object):
 
 
 							  """)
-					if type(self.output) != 'NoneType':
+
+					if  self.outtype == 'csv':
 						outputCSV(self.output,self.fileName)
+					elif self.outtype == 'json':
+						outputJSON(self.output,self.fileName)
 
 
 				if self.filetype == 3:
@@ -255,8 +263,10 @@ class chound(object):
 						self.listEmail = []
 
 						
-					if type(self.output) != 'NoneType':
+					if  self.outtype == 'csv':
 						outputCSV(self.output,self.fileName)
+					elif self.outtype == 'json':
+						outputJSON(self.output,self.fileName)
 
 
 		# end

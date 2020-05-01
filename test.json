@@ -1,0 +1,12 @@
+{
+"domain":
+{
+"0":"example.com"
+},
+"ip":{
+	"0":"93.184.216.34"
+	},
+"emails":
+{
+"0":
+"someone@example.com,user@example.com,john@example.com,july@example.com,bar@example.com,brigitte@example.com,'gitlab@example.com,tester@example.com,ali@example.com,ayse@example.com,abuse@ripe.net,hostmaster@ripe.net,'abuse@verizondigitalmedia.com"}}

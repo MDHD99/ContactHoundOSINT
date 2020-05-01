@@ -59,7 +59,13 @@ def outputCSV(file,filename):
 	try:
 		file.to_csv(filename)
 	except:
-		sys.exit(warn('Not a valid output file path'))
+		sys.exit(warn('Error while writing output file'))
+
+def outputJSON(file,filename):
+	try:
+		file.to_json(filename)
+	except:
+		sys.exit(warn('Error while writing output file'))
 
     
 

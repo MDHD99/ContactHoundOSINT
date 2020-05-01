@@ -57,12 +57,12 @@ class Banner:
 
  Email Sending:  
 
- -H             --html                    input file with dynamic html
- -f             --file                    input file(csv) without attachment
- --fa                                     input file(csv) with attachment
- --sE                                     sender email 
- --sP                                     sender password
- --subject                                email subject     
+ -h             --html                    input file with dynamic html
+ -f             --file                    input file (csv)
+ -e             --email                   sender email(if not used would result to default tool email) 
+ -p             --password                sender password
+ -s             --subject                 email subject     
+
 	 """)
 
 		if _exit_: exit(0)

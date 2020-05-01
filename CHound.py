@@ -32,6 +32,7 @@ from tld import get_fld
 class chound(object):
 	""" chound """
 	def __init__(self):
+		self.method = None
 		self.verbose = 1
 		self.domain = None
 		self.domain_list = None
@@ -82,169 +83,180 @@ class chound(object):
 	def main(self):
 		if len(sys.argv) <= 2:Banner().usage(True)
 		try:
-			opts,args = getopt.getopt(sys.argv[1:],'d:t:f:i:v:o:hb',
-				['domain=','info=','file=','type=','breach','verbose=','help','output='])
+
+			if sys.argv[1] == '--emailgather':
+				self.method = 'emailgather'
+				opts,args = getopt.getopt(sys.argv[1:],'d:t:f:i:v:o:hb',
+					['emailgather','domain=','info=','file=','type=','breach','verbose=','help','output='])
+			elif sys.arg[1] == '--emailsend':
+				self.method = 'emailsend'
+				opts,args = getopt.getopt(sys.argv[1:],'h:f:e:p:s:',
+					['emailgather','html=','file=','email=','password=','subject='])
+			
+			else:
+				Banner().usage(True)
 		except Exception as e:
 			Banner().usage(True)
 		Banner().banner()
-		for o,a in opts:
-			if o in ('-d','--domain'):self.domain=checkTarget(a)
-			elif o in ('-f','--file'):self.input=checkFile(a)
-			if o in ('-t','--type'):self.filetype =checkType(a)
-			if o in ('-v','--verbose'):self.verbose=checkVerbose(a)
-			if o in ('-b','--breach'):self.breach=True
-			if o in ('-o','--o'):
-				if a != '':
-		
-					self.fileName = checkPath(a)
-					self.output = writePANDAS(a)
+		if self.method == 'emailgather':
+			for o,a in opts:
+				if o in ('-d','--domain'):self.domain=checkTarget(a)
+				elif o in ('-f','--file'):self.input=checkFile(a)
+				if o in ('-t','--type'):self.filetype =checkType(a)
+				if o in ('-v','--verbose'):self.verbose=checkVerbose(a)
+				if o in ('-b','--breach'):self.breach=True
+				if o in ('-o','--output'):
+					if a != '':
+			
+						self.fileName = checkPath(a)
+						self.output = writePANDAS(a)
 
-				else:
-					Banner().usage(True)
+					else:
+						Banner().usage(True)
 
-				
-			if o in ('-h','--help'):Banner().usage(True)
+					
+				if o in ('-h','--help'):Banner().usage(True)
 
 			if((self.domain != None and self.input != None) or (self.domain == None and self.input == None)):
 				Banner().usage(True)
 
 
 
-		### start ####
+			### start ####
 
-		if(self.input == None):
-			if self.domain != ('' or None):
-				plus('Searching for: %s'%self.domain)
-				self.engine(self.domain,'all')
+			if(self.input == None):
+				if self.domain != ('' or None):
+					plus('Searching for: %s'%self.domain)
+					self.engine(self.domain,'all')
 
-			if self.listEmail == [] or self.listEmail == None:
-				sys.exit(warn('Not found emails... :('))
-			
-			else:
-				Banner().output()
-				info("List of found emails is...")
-				for email in self.listEmail:
-					plus(email)
-		
-
-			self.listEmail = []
-
-
-
-		elif(self.input != None):
-			if self.filetype == 1:
-				self.domain_list = readCSV(self.input,self.filetype)
-				for domain in self.domain_list:			  
-					self.domain = domain
-					if self.domain != ('' or None):
-						plus('Searching for: %s'%self.domain)
-						self.engine(self.domain,'all')
-
-					if self.listEmail == [] or self.listEmail == None:
-						warn('No Emails were found...')
-						 
-					else:
-						Banner().output()
-						info("List of found emails is...")
-						for email in self.listEmail:
-							plus(email)
-
-						
-					if type(self.output) != 'NoneType':
-						self.listEmail = ','.join(self.listEmail)
-						self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
-
-
-					self.listEmail = []
-
-					print("""	
-
-
-
-
-						  """)
-				if type(self.output) != 'NoneType':
-					outputCSV(self.output,self.fileName)
-
-
-			elif self.filetype == 2:
-				self.domain_list = readCSV(self.input,self.filetype)
-				for i in range(0,len(self.domain_list)):			  
-					self.domain = self.domain_list[i][0]
-					self.ip = self.domain_list[i][1]
-					if self.domain != ('' or None):
-						plus('Searching for: %s'%self.domain)
-
-						self.engine(self.domain,'all')
-
-
-					if self.listEmail == [] or self.listEmail == None:
-						warn('No Emails were found...') 
+				if self.listEmail == [] or self.listEmail == None:
+					sys.exit(warn('Not found emails... :('))
 				
-					else:
-						Banner().output()
-						info("List of found emails is...")
-						for email in self.listEmail:
-							plus(email)
+				else:
+					Banner().output()
+					info("List of found emails is...")
+					for email in self.listEmail:
+						plus(email)
+			
 
-						
-					if type(self.output) != 'NoneType':
-						self.listEmail = ','.join(self.listEmail)
-						self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
-
-					self.listEmail = []
-
-					print("""	
+				self.listEmail = []
 
 
 
+			elif(self.input != None):
+				if self.filetype == 1:
+					self.domain_list = readCSV(self.input,self.filetype)
+					for domain in self.domain_list:			  
+						self.domain = domain
+						if self.domain != ('' or None):
+							plus('Searching for: %s'%self.domain)
+							self.engine(self.domain,'all')
 
-						  """)
-				if type(self.output) != 'NoneType':
-					outputCSV(self.output,self.fileName)
+						if self.listEmail == [] or self.listEmail == None:
+							warn('No Emails were found...')
+							 
+						else:
+							Banner().output()
+							info("List of found emails is...")
+							for email in self.listEmail:
+								plus(email)
+
+							
+						if type(self.output) != 'NoneType':
+							self.listEmail = ','.join(self.listEmail)
+							self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
 
 
-			if self.filetype == 3:
-				self.domain_list = readCSV(self.input,self.filetype)
-				for i in range(0,len(self.domain_list)):			  
-					self.domain = self.domain_list[i][0]
-					self.ip = self.domain_list[i][1]
-					self.listEmail = self.domain_list[i][2]
-					emailsFound = True
-					if self.listEmail == 'nan':
 						self.listEmail = []
-						emailsFound = False
+
+						print("""	
+
+
+
+
+							  """)
+					if type(self.output) != 'NoneType':
+						outputCSV(self.output,self.fileName)
+
+
+				elif self.filetype == 2:
+					self.domain_list = readCSV(self.input,self.filetype)
+					for i in range(0,len(self.domain_list)):			  
+						self.domain = self.domain_list[i][0]
+						self.ip = self.domain_list[i][1]
 						if self.domain != ('' or None):
 							plus('Searching for: %s'%self.domain)
 
 							self.engine(self.domain,'all')
 
-							if self.listEmail == [] or self.listEmail == None:
-								warn('No Emails were found...') 
-						
-							else:
-								Banner().output()
-								info("List of found emails is...")
-								for email in self.listEmail:
-									plus(email)
-							print("""	
+
+						if self.listEmail == [] or self.listEmail == None:
+							warn('No Emails were found...') 
+					
+						else:
+							Banner().output()
+							info("List of found emails is...")
+							for email in self.listEmail:
+								plus(email)
+
+							
+						if type(self.output) != 'NoneType':
+							self.listEmail = ','.join(self.listEmail)
+							self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
+
+						self.listEmail = []
+
+						print("""	
 
 
 
 
-						  		 """)
+							  """)
+					if type(self.output) != 'NoneType':
+						outputCSV(self.output,self.fileName)
+
+
+				if self.filetype == 3:
+					self.domain_list = readCSV(self.input,self.filetype)
+					for i in range(0,len(self.domain_list)):			  
+						self.domain = self.domain_list[i][0]
+						self.ip = self.domain_list[i][1]
+						self.listEmail = self.domain_list[i][2]
+						emailsFound = True
+						if self.listEmail == 'nan':
+							self.listEmail = []
+							emailsFound = False
+							if self.domain != ('' or None):
+								plus('Searching for: %s'%self.domain)
+
+								self.engine(self.domain,'all')
+
+								if self.listEmail == [] or self.listEmail == None:
+									warn('No Emails were found...') 
+							
+								else:
+									Banner().output()
+									info("List of found emails is...")
+									for email in self.listEmail:
+										plus(email)
+								print("""	
+
+
+
+
+							  		 """)
+
+							
+						if type(self.output) != 'NoneType':
+							if emailsFound == False:
+								self.listEmail = ','.join(self.listEmail)
+							self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
+
+						self.listEmail = []
 
 						
 					if type(self.output) != 'NoneType':
-						if emailsFound == False:
-							self.listEmail = ','.join(self.listEmail)
-						self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
-
-					self.listEmail = []
-
-					
-				if type(self.output) != 'NoneType':
-					outputCSV(self.output,self.fileName)
+						outputCSV(self.output,self.fileName)
 
 
 		# end

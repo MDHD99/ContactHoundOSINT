@@ -141,7 +141,18 @@ class chound(object):
 						plus(email)
 			
 
-				self.listEmail = []
+					if type(self.output) != 'NoneType':
+						self.listEmail = ','.join(self.listEmail)
+						self.output = appendRow(self.output,self.domain, self.ip, self.listEmail)
+
+
+					self.listEmail = []
+
+
+				if  self.outtype == 'csv':
+					outputCSV(self.output,self.fileName)
+				elif self.outtype == 'json':
+					outputJSON(self.output,self.fileName)
 
 
 
